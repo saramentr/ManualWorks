@@ -14,4 +14,4 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cloudflared 
       - name: run cloudflared tunel
-        run: cloudflared tunnel
+        run: cloudflared tunnel run --url localhost:8080

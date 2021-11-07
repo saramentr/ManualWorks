@@ -20,7 +20,6 @@ jobs:
           CONF: ${{secrets.CONF}}
       - name: install and run tool for work
         run: |
-          sudo ls -al /opt/
           (sudo apt-get install python3-dev python3-pip python3-venv python3-wheel -y&& sudo pip3 install wheel)
           (sudo pip3 install jupyter_contrib_nbextensions && sudo jupyter contrib nbextension install)
           (sudo pip3 install scikit-learn&&sudo pip3 install xgboost&&sudo pip3 install kaggle --upgrade)
@@ -30,3 +29,11 @@ jobs:
           sudo jupyter-notebook --config=/opt/conf.py &
       - name: run cloudflared tunel
         run: cloudflared tunnel
+      - name: "commit results works"
+        run: |
+          sudo git config --local user.email "${GITHUB_ACTOR}@gmail.com"
+          sudo git config --local user.name "${GITHUB_ACTOR}"
+          sudo git remote -v
+          sudo git add outFold/\*.*
+          sudo git commit -m "save result manual works"
+          sudo git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:main --force 

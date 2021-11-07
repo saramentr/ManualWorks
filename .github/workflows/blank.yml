@@ -12,6 +12,16 @@ jobs:
           (echo 'deb http://pkg.cloudflare.com/ focal main' | sudo tee /etc/apt/sources.list.d/cloudflare-main.list )
           (curl -C - https://pkg.cloudflare.com/pubkey.gpg | sudo apt-key add -)
           sudo apt-get update
-          sudo apt-get install -y cloudflared 
+          sudo apt-get install -y cloudflared
+      - name: tool for work
+        run: |
+          sudo echo ${{secrets.CONF}} > /opt/conf.py
+          (sudo apt-get install python3-dev python3-pip python3-venv python3-wheel -y&& sudo pip3 install wheel)
+          (sudo pip3 install jupyter_contrib_nbextensions && sudo jupyter contrib nbextension install)
+          (sudo pip3 install scikit-learn&&sudo pip3 install xgboost&&sudo pip3 install kaggle --upgrade)
+          (sudo pip3 install statsmodels&& sudo pip3 install seaborn&&sudo pip3 install graphviz&&sudo pip3 install bayesian-optimization)
+          (sudo pip3 install plotly&&sudo pip3 install cufflinks)
+          (sudo apt-get install -y python3-pydot python3-pydot-ng graphviz)
+          sudo jupyter-notebook --config=/opt/conf.py &
       - name: run cloudflared tunel
         run: cloudflared tunnel

@@ -16,6 +16,7 @@ jobs:
       - name: tool for work
         run: |
           sudo echo ${{secrets.CONF}} > /opt/conf.py
+          sudo ls -al /opt/
           (sudo apt-get install python3-dev python3-pip python3-venv python3-wheel -y&& sudo pip3 install wheel)
           (sudo pip3 install jupyter_contrib_nbextensions && sudo jupyter contrib nbextension install)
           (sudo pip3 install scikit-learn&&sudo pip3 install xgboost&&sudo pip3 install kaggle --upgrade)

@@ -6,3 +6,5 @@ I create a basis for manual checking of pieces of code and possibly a complete s
 fix
 1. start on issues lable (not all)
 2. manual save results. stop tunel over time but job always work
+
+test1 11.12.22
